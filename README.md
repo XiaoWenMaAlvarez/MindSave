@@ -1,2 +1,3 @@
-# MindSave
-Aplicación móvil de salud mental para Android e iOS desarrollada con Flutter
+# mindsave
+
+A new Flutter project.

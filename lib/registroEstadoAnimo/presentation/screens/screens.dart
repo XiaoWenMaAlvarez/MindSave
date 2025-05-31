@@ -1,0 +1,1 @@
+export 'registro_estado_animo_screen.dart';
