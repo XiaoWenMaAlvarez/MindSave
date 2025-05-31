@@ -26,7 +26,6 @@ class CustomAppbar extends ConsumerWidget {
                 width: 28,
                 child: Image.asset("assets/img/icon.png", fit: BoxFit.contain),
               ),
-              //Icon(Icons.psychology_alt_outlined, color: colors.primary, size: 32,),
               const SizedBox(width: 5),
               Text('Mind Save', style: titleStyle,),
               const Spacer(),

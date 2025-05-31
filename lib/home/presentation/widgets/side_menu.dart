@@ -32,9 +32,9 @@ class SideMenuState extends ConsumerState<SideMenu> {
     return NavigationDrawer(
       selectedIndex: navDrawerIndex,
       onDestinationSelected: (value) {
+        final selectedItem = appMenuItems[value];
         widget.scaffoldKey.currentState?.closeEndDrawer();
         ref.read(selectedMenuItemProvider.notifier).state = value;
-        final selectedItem = appMenuItems[value];
         context.go(selectedItem.link);
       },
       children: [

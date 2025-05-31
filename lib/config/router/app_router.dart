@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
-import 'package:mindsave/testBreveEstadoAnimo/presentation/screens/screens.dart';
+import 'package:mindsave/test_breve_estado_animo/presentation/screens/screens.dart';
 import 'package:mindsave/home/presentation/screens/screens.dart';
-import 'package:mindsave/registroEstadoAnimo/presentation/screens/screens.dart';
+import 'package:mindsave/registro_estado_animo/presentation/screens/screens.dart';
 
 final appRouter = GoRouter(
   initialLocation: "/home",
