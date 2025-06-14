@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
+            leading: SizedBox(),
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
               title: CustomAppbar(),
@@ -41,6 +42,35 @@ class _HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Home screen");
+
+    final Color primaryColor = Theme.of(context).colorScheme.primary;
+    TextStyle titleStyle = Theme.of(context).textTheme.titleLarge!.copyWith(
+      color: primaryColor,
+      fontSize: 30,
+      fontWeight: FontWeight.bold,
+    );
+
+    TextStyle bodyStyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
+      fontSize: 20,
+      fontWeight: FontWeight.bold
+    );
+
+    //TODO: Mejorar Landing Page
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Column(
+        children: [
+          SizedBox(height: 20),
+          Text('Bienvenido a Mindsave', style: titleStyle),
+          SizedBox(height: 30),
+          Image.asset("assets/img/icon.png"),
+          SizedBox(height: 30),
+          Text(
+            'Una aplicación que le ayuda en caso de padecer de timidez, preocupación crónica, ataques de pánico, fobias, ansiedad por miedo a hablar en público, ansiedad por los exámenes, trastorno por estrés postraumático o trastorno obsesivo-compulsivo.', 
+            style: bodyStyle,
+            textAlign: TextAlign.center,),
+        ],
+      ),
+    );
   }
 }

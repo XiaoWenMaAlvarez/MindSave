@@ -16,7 +16,7 @@ class CustomBottomNavigation extends StatelessWidget {
       elevation: 1,
       selectedItemColor: Theme.of(context).colorScheme.primary,
       currentIndex: currentIndex,
-      onTap: (value) => context.go("/testBreveEstadoAnimo/$value"),
+      onTap: (value) => context.push("/testBreveEstadoAnimo/$value"),
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.add),

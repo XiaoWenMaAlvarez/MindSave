@@ -14,6 +14,7 @@ class FollowUpView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
+          leading: SizedBox(),
           floating: true,
           flexibleSpace: FlexibleSpaceBar(
             title: CustomAppbar(),
@@ -86,7 +87,7 @@ class _FollowUpViewState extends ConsumerState<_FollowUpViewBody> {
         Text("Nota: Para ver los resultados en detalle", style: bodyStyle),
         TextButton(
           child: Text("Haga click aquí", style: bodyStyle.copyWith(color: primaryColor)),
-          onPressed: () => context.go("/testBreveEstadoAnimo/3"), 
+          onPressed: () => context.push("/testBreveEstadoAnimo/3"), 
         )
       ],
     );

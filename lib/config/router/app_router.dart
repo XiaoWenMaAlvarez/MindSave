@@ -24,7 +24,16 @@ final appRouter = GoRouter(
       path: "/registroEstadoAnimo/:page",
       builder: (context, state) {
         final pageIndex = int.parse(state.pathParameters['page'] ?? "0");
-        return RegistroEstadoAnimoScreen(pageIndex: pageIndex);
+        return RegistroEstadoAnimoScreen(pageIndex: pageIndex, registerIndex: 0);
+      }
+    ),
+
+    GoRoute(
+      path: "/registroEstadoAnimo/:page/:idRegistro",
+      builder: (context, state) {
+        final pageIndex = int.parse(state.pathParameters['page'] ?? "0");
+        final registerIndex = int.parse(state.pathParameters['idRegistro'] ?? "0");
+        return RegistroEstadoAnimoScreen(pageIndex: pageIndex, registerIndex: registerIndex);
       }
     ),
     

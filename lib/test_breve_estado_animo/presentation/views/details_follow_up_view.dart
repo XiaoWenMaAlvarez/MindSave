@@ -13,6 +13,7 @@ class DetailsFollowUpView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
+          leading: SizedBox(),
           floating: true,
           flexibleSpace: FlexibleSpaceBar(
             title: CustomAppbar(),

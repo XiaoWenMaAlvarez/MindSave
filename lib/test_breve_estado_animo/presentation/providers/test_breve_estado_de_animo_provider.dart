@@ -60,7 +60,6 @@ class TestBreveEstadoDeAnimoNotifier extends StateNotifier<List<TestBreveEstadoD
         }).toList();
       }
     }
-
     
   }
 

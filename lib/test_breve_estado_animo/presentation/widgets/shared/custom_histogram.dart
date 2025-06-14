@@ -23,7 +23,7 @@ class CustomHistogram extends StatefulWidget {
 }
 
 class _CustomHistogramState extends State<CustomHistogram> {
-  int _currentMonthIndex = 0;
+  int _currentMonthIndex = DateTime.now().month - 1;
   late final List<String> monthsNames;
 
   int _interactedSpotIndex = -1;

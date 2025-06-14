@@ -15,6 +15,7 @@ class CreateView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
+          leading: SizedBox(),
           floating: true,
           flexibleSpace: FlexibleSpaceBar(
             title: CustomAppbar(),
@@ -87,7 +88,7 @@ class _TestBreveFormState extends ConsumerState<_TestBreveForm> {
             await ref.read(testBreveEstadoDeAnimoProvider.notifier).guardarTestBreveEstadoDeAnimo(testBreveEstadoDeAnimo);
             await ref.read(isTestBreveRealizadoHoyProvider.notifier).setIsTestBreveRealizadoHoy();
             await ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
-            if(context.mounted) context.go("/testBreveEstadoAnimo/1");
+            if(context.mounted) context.push("/testBreveEstadoAnimo/1");
           }, 
         ),
 
@@ -196,7 +197,7 @@ void _mostrarMensajeEliminarTestBreveEstadoDeAnimo(BuildContext context, WidgetR
             if(context.mounted) {
               _showSnackBar(context, 'Test Breve de Estado de Ánimo eliminado');
               context.pop();
-              context.go("/testBreveEstadoAnimo/0");
+              context.push("/testBreveEstadoAnimo/0");
             } 
           }, 
           child: const Text('Si, eliminar')
@@ -225,7 +226,7 @@ void _mostrarMensajeEditarTestBreveEstadoDeAnimo(BuildContext context, WidgetRef
             if(context.mounted) {
               _showSnackBar(context, 'Test Breve de Estado de Ánimo editado');
               context.pop();
-              context.go("/testBreveEstadoAnimo/0");
+              context.push("/testBreveEstadoAnimo/0");
             } 
           }, 
           child: const Text('Si, editar')
