@@ -55,7 +55,6 @@ class _HomeScreenBody extends StatelessWidget {
       fontWeight: FontWeight.bold
     );
 
-    //TODO: Mejorar Landing Page
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Column(

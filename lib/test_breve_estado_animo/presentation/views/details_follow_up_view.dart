@@ -242,18 +242,20 @@ class TitleAndYearDetails extends StatelessWidget {
         children: [
           Text("Seguimiento en detalle de Tests Breve de Estado de Ánimo", style: titleStyle),
           SizedBox(height: 20),
-          ExpansionTile(
-            title: Text("Año seleccionado", style: boldBodyStyle),
-            subtitle: Text("$yearSelected"),
-            children: [
-              for (int i = 2024; i <= DateTime.now().year; i++)
-                RadioListTile(
-                  title: Text('$i'),
-                  value: i, 
-                  groupValue: yearSelected, 
-                  onChanged: onChanged
-                ),
-            ],
+          RadioGroup(
+            groupValue: yearSelected, 
+            onChanged: onChanged,
+            child: ExpansionTile(
+              title: Text("Año seleccionado", style: boldBodyStyle),
+              subtitle: Text("$yearSelected"),
+              children: [
+                for (int i = 2024; i <= DateTime.now().year; i++)
+                  RadioListTile(
+                    title: Text('$i'),
+                    value: i,
+                  ),
+              ],
+            ),
           ),
         ],
       ),

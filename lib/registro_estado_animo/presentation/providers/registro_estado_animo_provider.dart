@@ -52,9 +52,8 @@ class RegistroEstadoDeAnimoNotifier extends StateNotifier<List<RegistroEstadoAni
           registroEstadoAnimoBuscado
         ];
       }
-    } catch (e, stack) {
-      print('Error capturado: $e');
-      print('Stack trace: $stack');
+    } catch (e) {
+      rethrow;
     }
     
 

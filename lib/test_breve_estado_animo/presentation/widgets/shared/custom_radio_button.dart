@@ -20,17 +20,19 @@ class CustomRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      title: Text(title),
-      children: [
-        for (int i = minValue; i <= maxValue; i++)
-          RadioListTile(
-            title: Text('$i - ${labels[i]}'),
-            value: i, 
-            groupValue: groupValue, 
-            onChanged: onChanged
-          ),
-      ],
+    return RadioGroup(
+      groupValue: groupValue, 
+      onChanged: onChanged,
+      child: ExpansionTile(
+        title: Text(title),
+        children: [
+          for (int i = minValue; i <= maxValue; i++)
+            RadioListTile(
+              title: Text('$i - ${labels[i]}'),
+              value: i,
+            ),
+        ],
+      ),
     );
   }
 }
