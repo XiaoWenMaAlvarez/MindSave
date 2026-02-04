@@ -5,33 +5,33 @@ import 'package:mindsave/test_breve_estado_animo/infrastructure/models/sentimien
 
 class TestBreveEstadoDeAnimoResponse {
   final DateTime fechaCreacion;
-  final SentimientosAnsiedadEmocionalTestBreveResponse sentimientosAnsiedadEmocionalTestBreve;
-  final SentimientosAnsiedadFisicaTestBreveResponse sentimientosAnsiedadFisicaTestBreve;
-  final DepresionTestBreveResponse depresionTestBreve;
-  final ImpulsoSuicidaTestBreveResponse impulsoSuicidaTestBreve;
+  final SentimientosAnsiedadEmocionalTestBreveResponse ansiedadEmocional;
+  final SentimientosAnsiedadFisicaTestBreveResponse ansiedadFisica;
+  final DepresionTestBreveResponse depresion;
+  final ImpulsoSuicidaTestBreveResponse impulsoSuicida;
 
   TestBreveEstadoDeAnimoResponse({
     required this.fechaCreacion,
-    required this.sentimientosAnsiedadEmocionalTestBreve,
-    required this.sentimientosAnsiedadFisicaTestBreve,
-    required this.depresionTestBreve,
-    required this.impulsoSuicidaTestBreve,
+    required this.ansiedadEmocional,
+    required this.ansiedadFisica,
+    required this.depresion,
+    required this.impulsoSuicida,
   });
 
-  TestBreveEstadoDeAnimoResponse.fromJson(Map<String, dynamic> json)
+  TestBreveEstadoDeAnimoResponse.fromJsonEntity(Map<String, dynamic> json)
       : fechaCreacion = DateTime.parse(json['fechaCreacion']),
-        sentimientosAnsiedadEmocionalTestBreve = SentimientosAnsiedadEmocionalTestBreveResponse.fromJson(json['sentimientosAnsiedadEmocionalTestBreve']),
-        sentimientosAnsiedadFisicaTestBreve = SentimientosAnsiedadFisicaTestBreveResponse.fromJson(json['sentimientosAnsiedadFisicaTestBreve']),
-        depresionTestBreve = DepresionTestBreveResponse.fromJson(json['depresionTestBreve']),
-        impulsoSuicidaTestBreve = ImpulsoSuicidaTestBreveResponse.fromJson(json['impulsoSuicidaTestBreve']);
+        ansiedadEmocional = SentimientosAnsiedadEmocionalTestBreveResponse.fromJson(json['sentimientosAnsiedadEmocionalTestBreve']),
+        ansiedadFisica = SentimientosAnsiedadFisicaTestBreveResponse.fromJson(json['sentimientosAnsiedadFisicaTestBreve']),
+        depresion = DepresionTestBreveResponse.fromJson(json['depresionTestBreve']),
+        impulsoSuicida = ImpulsoSuicidaTestBreveResponse.fromJson(json['impulsoSuicidaTestBreve']);
       
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJsonAPI() {
     return {
       'fechaCreacion': fechaCreacion.toIso8601String(),
-      'sentimientosAnsiedadEmocionalTestBreve': sentimientosAnsiedadEmocionalTestBreve.toJson(),
-      'sentimientosAnsiedadFisicaTestBreve': sentimientosAnsiedadFisicaTestBreve.toJson(),
-      'depresionTestBreve': depresionTestBreve.toJson(),
-      'impulsoSuicidaTestBreve': impulsoSuicidaTestBreve.toJson(),
+      'ansiedadEmocional': ansiedadEmocional.toJson(),
+      'ansiedadFisica': ansiedadFisica.toJson(),
+      'depresion': depresion.toJson(),
+      'impulsoSuicida': impulsoSuicida.toJson(),
     };
   }
 }

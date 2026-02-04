@@ -34,16 +34,21 @@ class TestBreveEstadoDeAnimoNotifier extends StateNotifier<List<TestBreveEstadoD
     ];
   }
 
-  Future<void> guardarTestBreveEstadoDeAnimo(TestBreveEstadoDeAnimo nvoTestBreveEstadoDeAnimo) async {
-    await _saveTestBreveEstadoDeAnimo(nvoTestBreveEstadoDeAnimo);
+  Future<String> guardarTestBreveEstadoDeAnimo(TestBreveEstadoDeAnimo nvoTestBreveEstadoDeAnimo) async {
+    try {
+        await _saveTestBreveEstadoDeAnimo(nvoTestBreveEstadoDeAnimo);
 
-    if(state.isNotEmpty) {
-      if(state.first.fechaCreacion.year == DateTime.now().year) {
-        state = [
-          ...state,
-          nvoTestBreveEstadoDeAnimo,
-        ];
+      if(state.isNotEmpty) {
+        if(state.first.fechaCreacion.year == DateTime.now().year) {
+          state = [
+            ...state,
+            nvoTestBreveEstadoDeAnimo,
+          ];
+        }
       }
+      return "OK";
+    } catch (e) {
+      return e.toString();
     }
     
   }

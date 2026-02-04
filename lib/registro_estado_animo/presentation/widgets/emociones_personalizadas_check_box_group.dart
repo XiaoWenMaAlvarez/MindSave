@@ -23,6 +23,7 @@ class _EmocionesPersonalizadasCheckBoxGroupState extends State<EmocionesPersonal
   void initState() {
     _controller = TextEditingController(text: '');  
     _hayError = null;
+    _porcentajeController = TextEditingController(text: widget.grupoEmociones.porcentajeCreenciaAntes?.toString() ?? "");
     super.initState();
   }
 
@@ -38,11 +39,16 @@ class _EmocionesPersonalizadasCheckBoxGroupState extends State<EmocionesPersonal
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    _porcentajeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     Emociones grupoEmociones = widget.grupoEmociones;
-
-    _porcentajeController = TextEditingController(text: widget.grupoEmociones.porcentajeCreenciaAntes == null ? "" : widget.grupoEmociones.porcentajeCreenciaAntes.toString()); 
 
     bool isValidaEmocion (String? value) {
       if(value == null || value.trim() == ""){

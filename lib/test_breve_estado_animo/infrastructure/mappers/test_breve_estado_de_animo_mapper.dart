@@ -6,10 +6,10 @@ class TestBreveEstadoDeAnimoMapper {
   static TestBreveEstadoDeAnimo testBreveEstadoDeAnimoDBToEntity(TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse) {
     return TestBreveEstadoDeAnimo(
       fechaCreacion: testBreveEstadoDeAnimoResponse.fechaCreacion,
-      sentimientosAnsiedadEmocionalTestBreve: sentimientosAnsiedadEmocionalTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.sentimientosAnsiedadEmocionalTestBreve),
-      sentimientosAnsiedadFisicaTestBreve: sentimientosAnsiedadFisicaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.sentimientosAnsiedadFisicaTestBreve),
-      depresionTestBreve: depresionTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.depresionTestBreve),
-      impulsoSuicidaTestBreve: impulsoSuicidaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.impulsoSuicidaTestBreve),
+      sentimientosAnsiedadEmocionalTestBreve: sentimientosAnsiedadEmocionalTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.ansiedadEmocional),
+      sentimientosAnsiedadFisicaTestBreve: sentimientosAnsiedadFisicaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.ansiedadFisica),
+      depresionTestBreve: depresionTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.depresion),
+      impulsoSuicidaTestBreve: impulsoSuicidaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.impulsoSuicida),
     );
   }
 

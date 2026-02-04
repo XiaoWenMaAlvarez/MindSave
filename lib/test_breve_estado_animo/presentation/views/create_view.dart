@@ -82,10 +82,14 @@ class _TestBreveFormState extends ConsumerState<_TestBreveForm> {
         FilledButton.icon(
           icon: const Icon(Icons.save),
           label: const Text('Guardar Test Breve Estado de Ánimo'),
-          onPressed: isTestBreveRealizadoHoy ? null : () async{
-            _showSnackBar(context, 'Test Breve de Estado de Ánimo guardado');
+          onPressed: isTestBreveRealizadoHoy ? null : () async {
             testBreveEstadoDeAnimo.fechaCreacion = DateTime.now();
-            await ref.read(testBreveEstadoDeAnimoProvider.notifier).guardarTestBreveEstadoDeAnimo(testBreveEstadoDeAnimo);
+            final String result = await ref.read(testBreveEstadoDeAnimoProvider.notifier).guardarTestBreveEstadoDeAnimo(testBreveEstadoDeAnimo);
+            if(result != "OK") {
+              if(context.mounted) _showSnackBar(context, "Error al intentar guardar el test de estado de ánimo");
+              return;
+            }
+            if(context.mounted) _showSnackBar(context, 'Test Breve de Estado de Ánimo guardado');
             await ref.read(isTestBreveRealizadoHoyProvider.notifier).setIsTestBreveRealizadoHoy();
             await ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
             if(context.mounted) context.push("/testBreveEstadoAnimo/1");
