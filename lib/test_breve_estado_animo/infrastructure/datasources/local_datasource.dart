@@ -63,9 +63,9 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
     List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoDecodificado = testsBreveEstadoDeAnimoCodificado.map((String testBreveEstadoDeAnimoStr) {
       Map<String, dynamic> testBreveEstadoDeAnimoJSON = jsonDecode(testBreveEstadoDeAnimoStr);
       
-      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJsonEntity(testBreveEstadoDeAnimoJSON);
+      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJson(testBreveEstadoDeAnimoJSON);
       
-      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoDBToEntity(testBreveEstadoDeAnimoResponse);
+      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoResponseToEntity(testBreveEstadoDeAnimoResponse);
     }).toList();
 
     List<TestBreveEstadoDeAnimo> retorno = testsBreveEstadoDeAnimoDecodificado.where((TestBreveEstadoDeAnimo testBreveEstadoDeAnimo) {
@@ -85,9 +85,9 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
     List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoDecodificado = testsBreveEstadoDeAnimoCodificado.map((String testBreveEstadoDeAnimoStr) {
       Map<String, dynamic> testBreveEstadoDeAnimoJSON = jsonDecode(testBreveEstadoDeAnimoStr);
       
-      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJsonEntity(testBreveEstadoDeAnimoJSON);
+      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJson(testBreveEstadoDeAnimoJSON);
       
-      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoDBToEntity(testBreveEstadoDeAnimoResponse);
+      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoResponseToEntity(testBreveEstadoDeAnimoResponse);
     }).toList();
 
     return testsBreveEstadoDeAnimoDecodificado.any(
@@ -108,9 +108,9 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
     List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoDecodificado = testsBreveEstadoDeAnimoCodificado.map((String testBreveEstadoDeAnimoStr) {
       Map<String, dynamic> testBreveEstadoDeAnimoJSON = jsonDecode(testBreveEstadoDeAnimoStr);
       
-      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJsonEntity(testBreveEstadoDeAnimoJSON);
+      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJson(testBreveEstadoDeAnimoJSON);
       
-      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoDBToEntity(testBreveEstadoDeAnimoResponse);
+      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoResponseToEntity(testBreveEstadoDeAnimoResponse);
     }).toList();
 
     bool isTestBreveRealizadoHoy = testsBreveEstadoDeAnimoDecodificado.any(
@@ -144,9 +144,9 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
     List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoDecodificado = testsBreveEstadoDeAnimoCodificado.map((String testBreveEstadoDeAnimoStr) {
       Map<String, dynamic> testBreveEstadoDeAnimoJSON = jsonDecode(testBreveEstadoDeAnimoStr);
       
-      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJsonEntity(testBreveEstadoDeAnimoJSON);
+      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJson(testBreveEstadoDeAnimoJSON);
       
-      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoDBToEntity(testBreveEstadoDeAnimoResponse);
+      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoResponseToEntity(testBreveEstadoDeAnimoResponse);
     }).toList();
 
     bool isTestBreveRealizadoHoy = testsBreveEstadoDeAnimoDecodificado.any(

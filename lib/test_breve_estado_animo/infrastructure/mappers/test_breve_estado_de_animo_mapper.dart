@@ -3,17 +3,17 @@ import 'package:mindsave/test_breve_estado_animo/infrastructure/models/models.da
 
 class TestBreveEstadoDeAnimoMapper {
 
-  static TestBreveEstadoDeAnimo testBreveEstadoDeAnimoDBToEntity(TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse) {
+  static TestBreveEstadoDeAnimo testBreveEstadoDeAnimoResponseToEntity(TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse) {
     return TestBreveEstadoDeAnimo(
       fechaCreacion: testBreveEstadoDeAnimoResponse.fechaCreacion,
-      sentimientosAnsiedadEmocionalTestBreve: sentimientosAnsiedadEmocionalTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.ansiedadEmocional),
-      sentimientosAnsiedadFisicaTestBreve: sentimientosAnsiedadFisicaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.ansiedadFisica),
-      depresionTestBreve: depresionTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.depresion),
-      impulsoSuicidaTestBreve: impulsoSuicidaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.impulsoSuicida),
+      sentimientosAnsiedadEmocionalTestBreve: _sentimientosAnsiedadEmocionalTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.ansiedadEmocional),
+      sentimientosAnsiedadFisicaTestBreve: _sentimientosAnsiedadFisicaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.ansiedadFisica),
+      depresionTestBreve: _depresionTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.depresion),
+      impulsoSuicidaTestBreve: _impulsoSuicidaTestBreveDBToEntity(testBreveEstadoDeAnimoResponse.impulsoSuicida),
     );
   }
 
-  static DepresionTestBreve depresionTestBreveDBToEntity(DepresionTestBreveResponse depresionTestBreveResponse) {
+  static DepresionTestBreve _depresionTestBreveDBToEntity(DepresionTestBreveResponse depresionTestBreveResponse) {
     return DepresionTestBreve(
       tristeza: depresionTestBreveResponse.tristeza,
       desesperanza: depresionTestBreveResponse.desesperanza,
@@ -23,14 +23,14 @@ class TestBreveEstadoDeAnimoMapper {
     );
   }
 
-  static ImpulsoSuicidaTestBreve impulsoSuicidaTestBreveDBToEntity(ImpulsoSuicidaTestBreveResponse depresionTestBreveResponse) {
+  static ImpulsoSuicidaTestBreve _impulsoSuicidaTestBreveDBToEntity(ImpulsoSuicidaTestBreveResponse impulsoSuicidaTestBreveResponse) {
     return ImpulsoSuicidaTestBreve(
-      pensamientosSuicidas: depresionTestBreveResponse.pensamientosSuicidas,
-      deseosDeMorir: depresionTestBreveResponse.deseosDeMorir,
+      pensamientosSuicidas: impulsoSuicidaTestBreveResponse.pensamientosSuicidas,
+      deseosDeMorir: impulsoSuicidaTestBreveResponse.deseosDeMorir,
     );
   }
 
-  static SentimientosAnsiedadEmocionalTestBreve sentimientosAnsiedadEmocionalTestBreveDBToEntity(SentimientosAnsiedadEmocionalTestBreveResponse sentimientosAnsiedadEmocionalTestBreveResponse) {
+  static SentimientosAnsiedadEmocionalTestBreve _sentimientosAnsiedadEmocionalTestBreveDBToEntity(SentimientosAnsiedadEmocionalTestBreveResponse sentimientosAnsiedadEmocionalTestBreveResponse) {
     return SentimientosAnsiedadEmocionalTestBreve(
       angustiado: sentimientosAnsiedadEmocionalTestBreveResponse.angustiado,
       nervioso: sentimientosAnsiedadEmocionalTestBreveResponse.nervioso,
@@ -40,7 +40,7 @@ class TestBreveEstadoDeAnimoMapper {
     );
   }
 
-  static SentimientosAnsiedadFisicaTestBreve sentimientosAnsiedadFisicaTestBreveDBToEntity(SentimientosAnsiedadFisicaTestBreveResponse sentimientosAnsiedadFisicaTestBreveResponse) {
+  static SentimientosAnsiedadFisicaTestBreve _sentimientosAnsiedadFisicaTestBreveDBToEntity(SentimientosAnsiedadFisicaTestBreveResponse sentimientosAnsiedadFisicaTestBreveResponse) {
     return SentimientosAnsiedadFisicaTestBreve(
       palpitaciones: sentimientosAnsiedadFisicaTestBreveResponse.palpitaciones,
       sudoracion: sentimientosAnsiedadFisicaTestBreveResponse.sudoracion,
@@ -52,6 +52,58 @@ class TestBreveEstadoDeAnimoMapper {
       mareos: sentimientosAnsiedadFisicaTestBreveResponse.mareos,
       sensacionIrrealidad: sentimientosAnsiedadFisicaTestBreveResponse.sensacionIrrealidad,
       inestabilidadHormigueos: sentimientosAnsiedadFisicaTestBreveResponse.inestabilidadHormigueos,
+    );
+  }
+
+  static ImpulsoSuicidaTestBreveResponse _impulsoSuicidaTestBreveEntityToResponse(ImpulsoSuicidaTestBreve impulsoSuicidaTestBreveEntity) {
+    return ImpulsoSuicidaTestBreveResponse(
+      pensamientosSuicidas: impulsoSuicidaTestBreveEntity.pensamientosSuicidas,
+      deseosDeMorir: impulsoSuicidaTestBreveEntity.deseosDeMorir,
+    );
+  }
+
+  static DepresionTestBreveResponse _depresionTestBreveEntityToResponse(DepresionTestBreve depresionTestBreveEntity) {
+    return DepresionTestBreveResponse(
+      tristeza: depresionTestBreveEntity.tristeza,
+      desesperanza: depresionTestBreveEntity.desesperanza,
+      bajaAutoestima: depresionTestBreveEntity.bajaAutoestima,
+      faltaDeValor: depresionTestBreveEntity.faltaDeValor,
+      perdidaDeSatisfaccion: depresionTestBreveEntity.perdidaDeSatisfaccion,
+    );
+  }
+
+  static SentimientosAnsiedadEmocionalTestBreveResponse _sentimientosAnsiedadEmocionalTestBreveEntityToResponse(SentimientosAnsiedadEmocionalTestBreve sentimientosAnsiedadEmocionalTestBreveEntity) {
+    return SentimientosAnsiedadEmocionalTestBreveResponse(
+      angustiado: sentimientosAnsiedadEmocionalTestBreveEntity.angustiado,
+      nervioso: sentimientosAnsiedadEmocionalTestBreveEntity.nervioso,
+      preocupado: sentimientosAnsiedadEmocionalTestBreveEntity.preocupado,
+      asustado: sentimientosAnsiedadEmocionalTestBreveEntity.asustado,
+      tenso: sentimientosAnsiedadEmocionalTestBreveEntity.tenso,
+    );
+  }
+
+  static SentimientosAnsiedadFisicaTestBreveResponse _sentimientosAnsiedadFisicaTestBreveEntityToResponse(SentimientosAnsiedadFisicaTestBreve sentimientosAnsiedadFisicaTestBreveEntity) {
+    return SentimientosAnsiedadFisicaTestBreveResponse(
+      palpitaciones: sentimientosAnsiedadFisicaTestBreveEntity.palpitaciones,
+      sudoracion: sentimientosAnsiedadFisicaTestBreveEntity.sudoracion,
+      temblores: sentimientosAnsiedadFisicaTestBreveEntity.temblores,
+      dificultadRespirar: sentimientosAnsiedadFisicaTestBreveEntity.dificultadRespirar,
+      ahogo: sentimientosAnsiedadFisicaTestBreveEntity.ahogo,
+      dolorPecho: sentimientosAnsiedadFisicaTestBreveEntity.dolorPecho,
+      nauseas: sentimientosAnsiedadFisicaTestBreveEntity.nauseas,
+      mareos: sentimientosAnsiedadFisicaTestBreveEntity.mareos,
+      sensacionIrrealidad: sentimientosAnsiedadFisicaTestBreveEntity.sensacionIrrealidad,
+      inestabilidadHormigueos: sentimientosAnsiedadFisicaTestBreveEntity.inestabilidadHormigueos,
+    );
+  }
+
+  static TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoEntityToResponse(TestBreveEstadoDeAnimo testBreveEstadoDeAnimoEntity) {
+    return TestBreveEstadoDeAnimoResponse(
+      fechaCreacion: testBreveEstadoDeAnimoEntity.fechaCreacion,
+      ansiedadEmocional: _sentimientosAnsiedadEmocionalTestBreveEntityToResponse(testBreveEstadoDeAnimoEntity.sentimientosAnsiedadEmocionalTestBreve),
+      ansiedadFisica: _sentimientosAnsiedadFisicaTestBreveEntityToResponse(testBreveEstadoDeAnimoEntity.sentimientosAnsiedadFisicaTestBreve),
+      depresion: _depresionTestBreveEntityToResponse(testBreveEstadoDeAnimoEntity.depresionTestBreve),
+      impulsoSuicida: _impulsoSuicidaTestBreveEntityToResponse(testBreveEstadoDeAnimoEntity.impulsoSuicidaTestBreve),
     );
   }
 

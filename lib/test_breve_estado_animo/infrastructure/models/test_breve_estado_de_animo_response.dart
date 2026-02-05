@@ -18,14 +18,14 @@ class TestBreveEstadoDeAnimoResponse {
     required this.impulsoSuicida,
   });
 
-  TestBreveEstadoDeAnimoResponse.fromJsonEntity(Map<String, dynamic> json)
+  TestBreveEstadoDeAnimoResponse.fromJson(Map<String, dynamic> json)
       : fechaCreacion = DateTime.parse(json['fechaCreacion']),
-        ansiedadEmocional = SentimientosAnsiedadEmocionalTestBreveResponse.fromJson(json['sentimientosAnsiedadEmocionalTestBreve']),
-        ansiedadFisica = SentimientosAnsiedadFisicaTestBreveResponse.fromJson(json['sentimientosAnsiedadFisicaTestBreve']),
-        depresion = DepresionTestBreveResponse.fromJson(json['depresionTestBreve']),
-        impulsoSuicida = ImpulsoSuicidaTestBreveResponse.fromJson(json['impulsoSuicidaTestBreve']);
+        ansiedadEmocional = SentimientosAnsiedadEmocionalTestBreveResponse.fromJson(json['ansiedadEmocional']),
+        ansiedadFisica = SentimientosAnsiedadFisicaTestBreveResponse.fromJson(json['ansiedadFisica']),
+        depresion = DepresionTestBreveResponse.fromJson(json['depresion']),
+        impulsoSuicida = ImpulsoSuicidaTestBreveResponse.fromJson(json['impulsoSuicida']);
       
-  Map<String, dynamic> toJsonAPI() {
+  Map<String, dynamic> toJson() {
     return {
       'fechaCreacion': fechaCreacion.toIso8601String(),
       'ansiedadEmocional': ansiedadEmocional.toJson(),

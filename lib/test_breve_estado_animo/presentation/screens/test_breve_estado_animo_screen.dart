@@ -11,6 +11,7 @@ class TestBreveEstadoAnimoScreen extends StatelessWidget {
     required this.pageIndex
   });
 
+  //TODO: PANTALLA DE CARGA Y PROVIDER DE CARGA
   final List<Widget> viewRoutes = const [
     CreateView(),
     DailyResultView(),
