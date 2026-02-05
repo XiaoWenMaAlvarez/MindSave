@@ -20,9 +20,9 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
   }
   
 
-  void _codificarYGuardarTestsEnLocal(List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoDecodificado, SharedPreferences localStorage) {
+  void _codificarYGuardarTestsEnLocal(List<TestBreveEstadoDeAnimoResponse> testsBreveEstadoDeAnimoDecodificado, SharedPreferences localStorage) {
     List<Map<String, dynamic>> nvoTestsBreveEstadoDeAnimoJSON = testsBreveEstadoDeAnimoDecodificado.map(
-      (TestBreveEstadoDeAnimo testBreveEstadoDeAnimo) => testBreveEstadoDeAnimo.toJson())
+      (TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimo) => testBreveEstadoDeAnimo.toJson())
       .toList();
     
     List<String> nvoTestsBreveEstadoDeAnimoCodificado = nvoTestsBreveEstadoDeAnimoJSON.map(
@@ -41,12 +41,14 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
 
     List<String> testsBreveEstadoDeAnimoCodificado = localStorage.getStringList("testsBreveEstadoDeAnimo") ?? [];
 
-    List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoDecodificado = testsBreveEstadoDeAnimoCodificado.map((String testBreveEstadoDeAnimoStr) {
+    List<TestBreveEstadoDeAnimoResponse> testsBreveEstadoDeAnimoDecodificado = testsBreveEstadoDeAnimoCodificado.map((String testBreveEstadoDeAnimoStr) {
       Map<String, dynamic> testBreveEstadoDeAnimoJSON = jsonDecode(testBreveEstadoDeAnimoStr);
-      return TestBreveEstadoDeAnimo.fromJson(testBreveEstadoDeAnimoJSON);
+      return TestBreveEstadoDeAnimoResponse.fromJson(testBreveEstadoDeAnimoJSON);
     }).toList();
 
-    testsBreveEstadoDeAnimoDecodificado.add(nvoTestBreveEstadoDeAnimo);
+    TestBreveEstadoDeAnimoResponse testBreveResponse = TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoEntityToResponse(nvoTestBreveEstadoDeAnimo);
+
+    testsBreveEstadoDeAnimoDecodificado.add(testBreveResponse);
 
     _codificarYGuardarTestsEnLocal(testsBreveEstadoDeAnimoDecodificado, localStorage);
 
@@ -167,7 +169,11 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
       testBreveEstadoDeAnimo.fechaCreacion.day == DateTime.now().day
     );
 
-    _codificarYGuardarTestsEnLocal(testsBreveEstadoDeAnimoDecodificado, localStorage);
+    List<TestBreveEstadoDeAnimoResponse> testsBreveEstadoDeAnimoResponse = testsBreveEstadoDeAnimoDecodificado.map(
+      (TestBreveEstadoDeAnimo testBreveEstadoDeAnimo) => TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoEntityToResponse(testBreveEstadoDeAnimo)
+    ).toList();
+
+    _codificarYGuardarTestsEnLocal(testsBreveEstadoDeAnimoResponse, localStorage);
 
     return;
   }
