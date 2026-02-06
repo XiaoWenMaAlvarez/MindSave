@@ -47,7 +47,6 @@ class _ResultViewBodyState extends ConsumerState<_ResultViewBody> {
 
   @override
   void initState() {
-    ref.read(isTestBreveRealizadoHoyProvider.notifier).setIsTestBreveRealizadoHoy();
     ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
     super.initState();
   }
@@ -55,7 +54,7 @@ class _ResultViewBodyState extends ConsumerState<_ResultViewBody> {
   @override
   Widget build(BuildContext context) {
 
-    isTestBreveRealizadoHoy = ref.watch(isTestBreveRealizadoHoyProvider);
+    isTestBreveRealizadoHoy = ref.watch(todayTestBreveEstadoDeAnimoProvider) != null;
 
     final Color primaryColor = Theme.of(context).colorScheme.primary;
     TextStyle titleStyle = Theme.of(context).textTheme.titleLarge!.copyWith(

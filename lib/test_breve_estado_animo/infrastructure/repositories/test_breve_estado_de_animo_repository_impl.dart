@@ -17,10 +17,6 @@ class TestBreveEstadoDeAnimoRepositoryImpl extends TestBreveEstadoDeAnimoReposit
     return await datasource.getTestBreveEstadoDeAnimoByYear(year);
   }
   
-  @override
-  Future<bool> isTestBreveRealizadoHoy() async {
-    return await datasource.isTestBreveRealizadoHoy();
-  }
   
   @override
   Future<TestBreveEstadoDeAnimo?> getTodayTestBreveEstadoDeAnimo() async{

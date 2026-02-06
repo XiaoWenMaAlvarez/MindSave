@@ -79,29 +79,6 @@ class TestBreveEstadoDeAnimoLocalDatasource extends TestBreveEstadoDeAnimoDataso
 
   
   @override
-  Future<bool> isTestBreveRealizadoHoy() async {
-    final localStorage = await preferencesStore;
-
-    List<String> testsBreveEstadoDeAnimoCodificado = localStorage.getStringList("testsBreveEstadoDeAnimo") ?? [];
-
-    List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoDecodificado = testsBreveEstadoDeAnimoCodificado.map((String testBreveEstadoDeAnimoStr) {
-      Map<String, dynamic> testBreveEstadoDeAnimoJSON = jsonDecode(testBreveEstadoDeAnimoStr);
-      
-      TestBreveEstadoDeAnimoResponse testBreveEstadoDeAnimoResponse = TestBreveEstadoDeAnimoResponse.fromJson(testBreveEstadoDeAnimoJSON);
-      
-      return TestBreveEstadoDeAnimoMapper.testBreveEstadoDeAnimoResponseToEntity(testBreveEstadoDeAnimoResponse);
-    }).toList();
-
-    return testsBreveEstadoDeAnimoDecodificado.any(
-      (TestBreveEstadoDeAnimo testBreveEstadoDeAnimo) => 
-      testBreveEstadoDeAnimo.fechaCreacion.year == DateTime.now().year && 
-      testBreveEstadoDeAnimo.fechaCreacion.month == DateTime.now().month &&
-      testBreveEstadoDeAnimo.fechaCreacion.day == DateTime.now().day
-    );
-  }
-
-  
-  @override
   Future<TestBreveEstadoDeAnimo?> getTodayTestBreveEstadoDeAnimo() async {
     final localStorage = await preferencesStore;
 

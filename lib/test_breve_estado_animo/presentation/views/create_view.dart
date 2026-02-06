@@ -57,15 +57,15 @@ class _TestBreveFormState extends ConsumerState<_TestBreveForm> {
 
   @override
   void initState(){
-    ref.read(isTestBreveRealizadoHoyProvider.notifier).setIsTestBreveRealizadoHoy();
-    ref.read(isTestBreveRealizadoHoyProvider.notifier).scheduleNextMidnightCheck();
+    ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
+    ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).scheduleNextMidnightCheck();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    isTestBreveRealizadoHoy = ref.watch(isTestBreveRealizadoHoyProvider);
+    isTestBreveRealizadoHoy = ref.watch(todayTestBreveEstadoDeAnimoProvider) != null;
     
     return Column(
       children: [ 
@@ -90,7 +90,6 @@ class _TestBreveFormState extends ConsumerState<_TestBreveForm> {
               return;
             }
             if(context.mounted) _showSnackBar(context, 'Test Breve de Estado de Ánimo guardado');
-            await ref.read(isTestBreveRealizadoHoyProvider.notifier).setIsTestBreveRealizadoHoy();
             await ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
             if(context.mounted) context.push("/testBreveEstadoAnimo/1");
           }, 
@@ -196,8 +195,7 @@ void _mostrarMensajeEliminarTestBreveEstadoDeAnimo(BuildContext context, WidgetR
         FilledButton(
           onPressed: () async {
             await ref.read(testBreveEstadoDeAnimoProvider.notifier).eliminarTestBreveEstadoDeAnimoDeHoy();
-            await ref.read(isTestBreveRealizadoHoyProvider.notifier).setIsTestBreveRealizadoHoy();
-            await ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
+            ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).eliminarTestBreveRealizadoHoy();
             if(context.mounted) {
               _showSnackBar(context, 'Test Breve de Estado de Ánimo eliminado');
               context.pop();

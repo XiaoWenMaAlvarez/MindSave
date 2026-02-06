@@ -66,15 +66,6 @@ class TestBreveEstadoDeAnimoAPIDatasource extends TestBreveEstadoDeAnimoDatasour
   }
 
   @override
-  Future<bool> isTestBreveRealizadoHoy() async {
-    // TODO: implement getTodayTestBreveEstadoDeAnimo
-    final response = await dio.get("/api/test-breve-estado-de-animo/is-test-breve-realizado-hoy/", queryParameters: {
-      "userID": "",
-    });
-    return response.data;
-  }
-
-  @override
   Future<TestBreveEstadoDeAnimo?> getTodayTestBreveEstadoDeAnimo() async{
     // TODO: implement getTodayTestBreveEstadoDeAnimo
     final response = await dio.get("/api/test-breve-estado-de-animo/get-today-test-breve-estado-de-animo/", queryParameters: {

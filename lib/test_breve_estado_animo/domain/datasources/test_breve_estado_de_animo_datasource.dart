@@ -12,11 +12,6 @@ abstract class TestBreveEstadoDeAnimoDatasource {
 
   Future<void> eliminarTestBreveEstadoDeAnimoDeHoy();
 
-
-  //OTROS
-
-  Future<bool> isTestBreveRealizadoHoy();
-
   Future<TestBreveEstadoDeAnimo?> getTodayTestBreveEstadoDeAnimo();
   
 }

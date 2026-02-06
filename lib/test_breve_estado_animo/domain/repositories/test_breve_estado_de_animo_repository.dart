@@ -11,13 +11,7 @@ abstract class TestBreveEstadoDeAnimoRepository {
   Future<void> editarTestBreveEstadoDeAnimoDeHoy(TestBreveEstadoDeAnimo testBreveEstadoDeAnimo);
 
   Future<void> eliminarTestBreveEstadoDeAnimoDeHoy();
-  
-
-  //OTROS
-
-  Future<bool> isTestBreveRealizadoHoy();
 
   Future<TestBreveEstadoDeAnimo?> getTodayTestBreveEstadoDeAnimo();
-
   
 }
