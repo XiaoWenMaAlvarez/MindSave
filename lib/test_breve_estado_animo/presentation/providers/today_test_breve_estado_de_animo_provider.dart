@@ -10,16 +10,21 @@ class TodayTestBreveEstadoDeAnimoNotifier extends StateNotifier<TestBreveEstadoD
   
   Timer? _timer;
   final GetTodayTestBreveEstadoDeAnimo _getTodayTestBreveEstadoDeAnimo;
+  final SetIsLoading _setIsLoading;
 
   TodayTestBreveEstadoDeAnimoNotifier({
     required GetTodayTestBreveEstadoDeAnimo getTodayTestBreveEstadoDeAnimo,
+    required SetIsLoading setIsLoading,
   }):
     _getTodayTestBreveEstadoDeAnimo = getTodayTestBreveEstadoDeAnimo,
+    _setIsLoading = setIsLoading,
     super(null);
 
   Future<void> setTestBreveRealizadoHoy() async {
     if(state != null) return;
+    _setIsLoading(true);
     final TestBreveEstadoDeAnimo? result = await _getTodayTestBreveEstadoDeAnimo();
+    _setIsLoading(false);
     state = result;
   }
 
@@ -49,8 +54,10 @@ class TodayTestBreveEstadoDeAnimoNotifier extends StateNotifier<TestBreveEstadoD
 
 final todayTestBreveEstadoDeAnimoProvider = StateNotifierProvider<TodayTestBreveEstadoDeAnimoNotifier, TestBreveEstadoDeAnimo?>(
   (ref) {
+    bool setIsLoading(bool value) => ref.read(isLoadingProvider.notifier).state = false;
     return TodayTestBreveEstadoDeAnimoNotifier(
       getTodayTestBreveEstadoDeAnimo: ref.watch(testBreveEstadoDeAnimoRepositoryProvider).getTodayTestBreveEstadoDeAnimo,
+      setIsLoading: setIsLoading,
     );
   }
 );

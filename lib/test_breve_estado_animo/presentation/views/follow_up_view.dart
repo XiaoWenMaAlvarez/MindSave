@@ -46,12 +46,18 @@ class _FollowUpViewState extends ConsumerState<_FollowUpViewBody> {
 
   @override
   void initState() {
-    ref.read(testBreveEstadoDeAnimoProvider.notifier).loadTestBreveEstadoDeAnimoByYear(DateTime.now().year);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(testBreveEstadoDeAnimoProvider.notifier).loadTestBreveEstadoDeAnimoByYear(DateTime.now().year);
+    });
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    bool isLoading = ref.watch(isLoadingProvider);
+    if(isLoading) return const Center(child: CircularProgressIndicator());
 
     int yearSelected = ref.watch(selectedYearProvider);
 

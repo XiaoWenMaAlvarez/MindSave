@@ -47,6 +47,9 @@ class _ResultViewBodyState extends ConsumerState<_ResultViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    
+    bool isLoading = ref.watch(isLoadingProvider);
+    if(isLoading) return const Center(child: CircularProgressIndicator());
 
     isTestBreveRealizadoHoy = ref.watch(todayTestBreveEstadoDeAnimoProvider) != null;
 

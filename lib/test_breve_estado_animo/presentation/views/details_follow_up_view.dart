@@ -48,6 +48,9 @@ class _DetailsFollowViewState extends ConsumerState<_DetailsFollowViewBody> {
   @override
   Widget build(BuildContext context) {
 
+    bool isLoading = ref.watch(isLoadingProvider);
+    if(isLoading) return const Center(child: CircularProgressIndicator());
+
     yearSelected = ref.watch(selectedYearProvider);
 
     List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimo = ref.watch(testBreveEstadoDeAnimoProvider).where(
