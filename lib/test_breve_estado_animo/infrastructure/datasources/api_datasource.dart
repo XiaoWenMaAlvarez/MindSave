@@ -31,6 +31,8 @@ class TestBreveEstadoDeAnimoAPIDatasource extends TestBreveEstadoDeAnimoDatasour
     return testBreveResponseJSON;
   }
 
+  //TODO Obtener el ID del usuario mediante autenticación
+
   @override
   Future<void> saveTestBreveEstadoDeAnimo(TestBreveEstadoDeAnimo nvoTestBreveEstadoDeAnimo) async {
     Map<String, dynamic> nvoTestBreveJson = _fromEntityToJson(nvoTestBreveEstadoDeAnimo);
@@ -50,13 +52,9 @@ class TestBreveEstadoDeAnimoAPIDatasource extends TestBreveEstadoDeAnimoDatasour
 
   @override
   Future<List<TestBreveEstadoDeAnimo>> getTestBreveEstadoDeAnimoByYear(int year) async {
-    // TODO: implement endpoint
-
-    final response = await dio.get("/api/test-breve-estado-de-animo/", queryParameters: {
-      "year": year,
-    });
-
-    final List<Map<String, dynamic>> testsBreveEstadoDeAnimoResponseJson = response.data;
+    final response = await dio.get("/api/test-breve-estado-de-animo/by-year/$year");
+    
+    final List<Map<String, dynamic>> testsBreveEstadoDeAnimoResponseJson = List<Map<String, dynamic>>.from(response.data);
 
     final List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimoEntities = testsBreveEstadoDeAnimoResponseJson.map(
       (Map<String, dynamic> testBreveResponse) => _fromJsonToEntity(testBreveResponse)
@@ -67,32 +65,39 @@ class TestBreveEstadoDeAnimoAPIDatasource extends TestBreveEstadoDeAnimoDatasour
 
   @override
   Future<TestBreveEstadoDeAnimo?> getTodayTestBreveEstadoDeAnimo() async{
-    // TODO: implement getTodayTestBreveEstadoDeAnimo
-    final response = await dio.get("/api/test-breve-estado-de-animo/get-today-test-breve-estado-de-animo/", queryParameters: {
-      "userID": "",
-    });
+    final today = DateTime.now();
+    final year = today.year;
+    final month = today.month;
+    final day = today.day;
+    final response = await dio.get("/api/test-breve-estado-de-animo/by-date/$year/$month/$day");
 
     return _fromJsonToEntity(response.data);
   }
 
   @override
   Future<void> editarTestBreveEstadoDeAnimoDeHoy(TestBreveEstadoDeAnimo testBreveEstadoDeAnimo) async {
-    // TODO: implement editarTestBreveEstadoDeAnimoDeHoy
-    await eliminarTestBreveEstadoDeAnimoDeHoy();
-    await saveTestBreveEstadoDeAnimo(testBreveEstadoDeAnimo);
+    Map<String, dynamic> nvoTestBreveJson = _fromEntityToJson(testBreveEstadoDeAnimo);
+
+    final response = await dio.put("/api/test-breve-estado-de-animo/", data: {
+      ...nvoTestBreveJson,
+      "idUsuario": "65f1a2b3c4d5e6f7a8b9c0d1"
+    });
+
+    if(response.statusCode != 200) {
+      throw Exception("Error al editar el test breve estado de ánimo");
+    }
+
     return;
   }
 
   @override
   Future<void> eliminarTestBreveEstadoDeAnimoDeHoy() async {
-    // TODO: implement eliminarTestBreveEstadoDeAnimoDeHoy
-    await dio.get("/api/test-breve-estado-de-animo/", queryParameters: {
-      "userID": "",
-    });
+    final today = DateTime.now();
+    final year = today.year;
+    final month = today.month;
+    final day = today.day;
+    await dio.delete("/api/test-breve-estado-de-animo/$year/$month/$day");
     return;
   }
-
-  
-
 
 }

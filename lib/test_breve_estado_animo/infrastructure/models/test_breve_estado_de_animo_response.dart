@@ -4,14 +4,14 @@ import 'package:mindsave/test_breve_estado_animo/infrastructure/models/sentimien
 import 'package:mindsave/test_breve_estado_animo/infrastructure/models/sentimientos_ansiedad_fisica_test_breve_response.dart';
 
 class TestBreveEstadoDeAnimoResponse {
-  final DateTime fechaCreacion;
+  final DateTime fecha;
   final SentimientosAnsiedadEmocionalTestBreveResponse ansiedadEmocional;
   final SentimientosAnsiedadFisicaTestBreveResponse ansiedadFisica;
   final DepresionTestBreveResponse depresion;
   final ImpulsoSuicidaTestBreveResponse impulsoSuicida;
 
   TestBreveEstadoDeAnimoResponse({
-    required this.fechaCreacion,
+    required this.fecha,
     required this.ansiedadEmocional,
     required this.ansiedadFisica,
     required this.depresion,
@@ -19,7 +19,7 @@ class TestBreveEstadoDeAnimoResponse {
   });
 
   TestBreveEstadoDeAnimoResponse.fromJson(Map<String, dynamic> json)
-      : fechaCreacion = DateTime.parse(json['fechaCreacion']),
+      : fecha = DateTime.parse(json['fecha']),
         ansiedadEmocional = SentimientosAnsiedadEmocionalTestBreveResponse.fromJson(json['ansiedadEmocional']),
         ansiedadFisica = SentimientosAnsiedadFisicaTestBreveResponse.fromJson(json['ansiedadFisica']),
         depresion = DepresionTestBreveResponse.fromJson(json['depresion']),
@@ -27,7 +27,7 @@ class TestBreveEstadoDeAnimoResponse {
       
   Map<String, dynamic> toJson() {
     return {
-      'fechaCreacion': fechaCreacion.toIso8601String(),
+      'fecha': fecha.toIso8601String(),
       'ansiedadEmocional': ansiedadEmocional.toJson(),
       'ansiedadFisica': ansiedadFisica.toJson(),
       'depresion': depresion.toJson(),

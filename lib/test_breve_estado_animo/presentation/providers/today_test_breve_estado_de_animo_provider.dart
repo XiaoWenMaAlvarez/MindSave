@@ -22,6 +22,10 @@ class TodayTestBreveEstadoDeAnimoNotifier extends StateNotifier<TestBreveEstadoD
     state = result;
   }
 
+  void localSetTestBreveRealizadoHoy(TestBreveEstadoDeAnimo nvoTest) {
+    state = nvoTest;
+  }
+
   void eliminarTestBreveRealizadoHoy() {
     state = null;
   }

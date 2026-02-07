@@ -224,7 +224,7 @@ void _mostrarMensajeEditarTestBreveEstadoDeAnimo(BuildContext context, WidgetRef
         FilledButton(
           onPressed: () async {
             await ref.read(testBreveEstadoDeAnimoProvider.notifier).sobrescribirTestBreveEstadoDeAnimoDeHoy(testBreveEstadoDeAnimo);
-            await ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
+            ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).localSetTestBreveRealizadoHoy(testBreveEstadoDeAnimo);
             if(context.mounted) {
               _showSnackBar(context, 'Test Breve de Estado de Ánimo editado');
               context.pop();
