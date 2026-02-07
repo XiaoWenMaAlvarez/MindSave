@@ -46,12 +46,6 @@ class _ResultViewBodyState extends ConsumerState<_ResultViewBody> {
   late bool isTestBreveRealizadoHoy;
 
   @override
-  void initState() {
-    ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
 
     isTestBreveRealizadoHoy = ref.watch(todayTestBreveEstadoDeAnimoProvider) != null;
@@ -82,7 +76,7 @@ class _ResultViewBodyState extends ConsumerState<_ResultViewBody> {
             Text("No hay resultados para hoy", style: titleStyle),
             const SizedBox(height: 20),
             FilledButton(
-              onPressed: () => context.push("/testBreveEstadoAnimo/0"), 
+              onPressed: () => context.go("/testBreveEstadoAnimo/0"), 
               child: const Text("Crear registro")
             )
           ]
@@ -140,7 +134,7 @@ class _ResultViewBodyState extends ConsumerState<_ResultViewBody> {
           Align(
             alignment: Alignment.center,
             child: FilledButton(
-              onPressed: () => context.push("/testBreveEstadoAnimo/2"), 
+              onPressed: () => context.go("/testBreveEstadoAnimo/2"), 
               child: const Text("Visualizar seguimiento")
             ),
           ),

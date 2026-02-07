@@ -89,9 +89,9 @@ class _TestBreveFormState extends ConsumerState<_TestBreveForm> {
               if(context.mounted) _showSnackBar(context, "Error al intentar guardar el test de estado de ánimo");
               return;
             }
+            ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).localSetTestBreveRealizadoHoy(testBreveEstadoDeAnimo);
             if(context.mounted) _showSnackBar(context, 'Test Breve de Estado de Ánimo guardado');
-            await ref.read(todayTestBreveEstadoDeAnimoProvider.notifier).setTestBreveRealizadoHoy();
-            if(context.mounted) context.push("/testBreveEstadoAnimo/1");
+            if(context.mounted) context.go("/testBreveEstadoAnimo/1");
           }, 
         ),
 
@@ -199,7 +199,7 @@ void _mostrarMensajeEliminarTestBreveEstadoDeAnimo(BuildContext context, WidgetR
             if(context.mounted) {
               _showSnackBar(context, 'Test Breve de Estado de Ánimo eliminado');
               context.pop();
-              context.push("/testBreveEstadoAnimo/0");
+              context.go("/testBreveEstadoAnimo/0");
             } 
           }, 
           child: const Text('Si, eliminar')
@@ -228,7 +228,7 @@ void _mostrarMensajeEditarTestBreveEstadoDeAnimo(BuildContext context, WidgetRef
             if(context.mounted) {
               _showSnackBar(context, 'Test Breve de Estado de Ánimo editado');
               context.pop();
-              context.push("/testBreveEstadoAnimo/0");
+              context.go("/testBreveEstadoAnimo/0");
             } 
           }, 
           child: const Text('Si, editar')

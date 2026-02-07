@@ -70,7 +70,7 @@ class TestBreveEstadoDeAnimoAPIDatasource extends TestBreveEstadoDeAnimoDatasour
     final month = today.month;
     final day = today.day;
     final response = await dio.get("/api/test-breve-estado-de-animo/by-date/$year/$month/$day");
-
+    if(response.data == null) return null;
     return _fromJsonToEntity(response.data);
   }
 

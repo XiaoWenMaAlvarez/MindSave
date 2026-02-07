@@ -13,10 +13,30 @@ final appRouter = GoRouter(
     ),
 
     GoRoute(
-      path: "/testBreveEstadoAnimo/:page",
+      path: "/testBreveEstadoAnimo/0",
       builder: (context, state) {
-        final pageIndex = int.parse(state.pathParameters['page'] ?? "0");
-        return TestBreveEstadoAnimoScreen(pageIndex: pageIndex);
+        return TestBreveEstadoAnimoCreateScreen();
+      }
+    ),
+
+    GoRoute(
+      path: "/testBreveEstadoAnimo/1",
+      builder: (context, state) {
+        return TestBreveEstadoAnimoDailyResultsScreen();
+      }
+    ),
+
+    GoRoute(
+      path: "/testBreveEstadoAnimo/2",
+      builder: (context, state) {
+        return TestBreveEstadoAnimoYearResultsScreen();
+      }
+    ),
+
+    GoRoute(
+      path: "/testBreveEstadoAnimo/3",
+      builder: (context, state) {
+        return TestBreveEstadoAnimoDetailsYearResultsScreen();
       }
     ),
 

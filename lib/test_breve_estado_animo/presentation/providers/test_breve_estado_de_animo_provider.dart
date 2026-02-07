@@ -28,8 +28,12 @@ class TestBreveEstadoDeAnimoNotifier extends StateNotifier<List<TestBreveEstadoD
     super([]);
 
   Future<void> loadTestBreveEstadoDeAnimoByYear(int year) async {
+    if(state.isNotEmpty && state.any((test) => test.fechaCreacion.year == year)) {
+      return;
+    }
     final List<TestBreveEstadoDeAnimo> newTestsBreveEstadoDeAnimo = await _fetchTestBreveEstadoDeAnimoByYear(year);
     state = [
+      ...state,
       ...newTestsBreveEstadoDeAnimo,
     ];
   }

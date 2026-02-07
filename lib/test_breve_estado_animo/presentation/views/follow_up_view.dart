@@ -44,20 +44,20 @@ class _FollowUpViewBody extends ConsumerStatefulWidget {
 
 class _FollowUpViewState extends ConsumerState<_FollowUpViewBody> {
 
-  int yearSelected = DateTime.now().year;
-
   @override
   void initState() {
-    ref.read(testBreveEstadoDeAnimoProvider.notifier).loadTestBreveEstadoDeAnimoByYear(yearSelected);
+    ref.read(testBreveEstadoDeAnimoProvider.notifier).loadTestBreveEstadoDeAnimoByYear(DateTime.now().year);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    yearSelected = ref.watch(selectedYearProvider);
+    int yearSelected = ref.watch(selectedYearProvider);
 
-    List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimo = ref.watch(testBreveEstadoDeAnimoProvider);
+    List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimo = ref.watch(testBreveEstadoDeAnimoProvider).where(
+      (testBreveEstadoDeAnimo) => testBreveEstadoDeAnimo.fechaCreacion.year == yearSelected
+    ).toList();
 
     TextStyle bodyStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
       fontSize: 16,
@@ -87,7 +87,7 @@ class _FollowUpViewState extends ConsumerState<_FollowUpViewBody> {
         Text("Nota: Para ver los resultados en detalle", style: bodyStyle),
         TextButton(
           child: Text("Haga click aquí", style: bodyStyle.copyWith(color: primaryColor)),
-          onPressed: () => context.push("/testBreveEstadoAnimo/3"), 
+          onPressed: () => context.go("/testBreveEstadoAnimo/3"), 
         )
       ],
     );

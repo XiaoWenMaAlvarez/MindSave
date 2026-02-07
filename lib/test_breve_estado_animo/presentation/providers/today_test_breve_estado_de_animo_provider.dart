@@ -18,6 +18,7 @@ class TodayTestBreveEstadoDeAnimoNotifier extends StateNotifier<TestBreveEstadoD
     super(null);
 
   Future<void> setTestBreveRealizadoHoy() async {
+    if(state != null) return;
     final TestBreveEstadoDeAnimo? result = await _getTodayTestBreveEstadoDeAnimo();
     state = result;
   }

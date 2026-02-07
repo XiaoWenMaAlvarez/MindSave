@@ -46,17 +46,13 @@ class _DetailsFollowViewState extends ConsumerState<_DetailsFollowViewBody> {
   int yearSelected = DateTime.now().year;
 
   @override
-  void initState() {
-    ref.read(testBreveEstadoDeAnimoProvider.notifier).loadTestBreveEstadoDeAnimoByYear(yearSelected);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
 
     yearSelected = ref.watch(selectedYearProvider);
 
-    List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimo = ref.watch(testBreveEstadoDeAnimoProvider);
+    List<TestBreveEstadoDeAnimo> testsBreveEstadoDeAnimo = ref.watch(testBreveEstadoDeAnimoProvider).where(
+      (testBreveEstadoDeAnimo) => testBreveEstadoDeAnimo.fechaCreacion.year == yearSelected
+    ).toList();
 
     List<List<TestBreveEstadoDeAnimo>> testsBrevesPorAnio = [
       for(int i = 0; i < 12; i++)
