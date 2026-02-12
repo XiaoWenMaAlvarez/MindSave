@@ -19,6 +19,7 @@ class MainApp extends ConsumerStatefulWidget {
 }
 
 class _MainAppState extends ConsumerState<MainApp> {
+  
   @override
   void initState() {
     super.initState();
@@ -34,7 +35,7 @@ class _MainAppState extends ConsumerState<MainApp> {
     return MaterialApp.router(
       title: 'Mind Save',
       debugShowCheckedModeBanner: false,
-      routerConfig: appRouter,
+      routerConfig: ref.watch(goRouterProvider),
       theme: appTheme.getTheme(),
     );
   }

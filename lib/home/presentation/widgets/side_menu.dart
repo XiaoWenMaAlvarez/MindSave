@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mindsave/auth/presentation/providers/auth_provider.dart';
 import 'package:mindsave/config/menu/menu_items.dart';
 import 'package:mindsave/home/presentation/providers/providers.dart';
 
@@ -76,6 +77,12 @@ class SideMenuState extends ConsumerState<SideMenu> {
           onChanged: (value) {
             ref.read(themeProvider.notifier).toggleDarkMode();
           },
+        ),
+        ListTile(
+          leading: Icon(Icons.logout_outlined),
+          title: Text("Cerrar sesión"),
+          onTap: ref.read(authProvider.notifier).logout,
+          horizontalTitleGap: 5,
         )
       ],
     );
