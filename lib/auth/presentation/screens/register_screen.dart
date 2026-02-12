@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mindsave/auth/presentation/providers/auth_provider.dart';
 
-String? validarEmail(String? value) {
+String? _validarEmail(String? value) {
   if(value == null || value.isEmpty || value.trim().isEmpty) return "El campo es obligatorio";
   final RegExp emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   if(!emailRegExp.hasMatch(value)) return "No tiene formato de correo electrónico";
   return null;
 }
 
-String? validarPassword(String? value) {
+String? _validarPassword(String? value) {
   if(value == null || value.isEmpty || value.trim().isEmpty) return "El campo es obligatorio";
   if(value.trim().length < 6) return "Se requieren al menos 6 caracteres";
   //final RegExp passwordRegExp = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-\\[\]/+=~`]).{8,}$');
@@ -18,33 +18,53 @@ String? validarPassword(String? value) {
   return null;
 }
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+String? _validarNombre(String? value) {
+  if(value == null || value.isEmpty || value.trim().isEmpty) return "El campo es obligatorio";
+  if(value.trim().length < 2) return "Se requieren al menos 2 caracteres";
+  return null;
+}
+
+
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const _LoginScreenBody(),
+      body: const _RegisterScreenBody(),
     );
   }
 }
 
-class _LoginScreenBody extends ConsumerStatefulWidget {
-  const _LoginScreenBody();
+class _RegisterScreenBody extends ConsumerStatefulWidget {
+  const _RegisterScreenBody();
 
   @override
-    _LoginScreenBodyState createState() => _LoginScreenBodyState();
+    _RegisterScreenBodyState createState() => _RegisterScreenBodyState();
 }
 
-class _LoginScreenBodyState extends ConsumerState<_LoginScreenBody> {
+class _RegisterScreenBodyState extends ConsumerState<_RegisterScreenBody> {
   String email = "";
   String password = "";
-  bool obscureText = true;
+  String repeatPassword = "";
+  String name = "";
+
+  bool obscureTextPassword = true;
+  bool obscureTextRepeatPassword = true;
   bool isLoading = false;
 
   final _formKey = GlobalKey<FormState>();
   final focusNodeEmail = FocusNode();
   final focusNodePassword = FocusNode();
+  final focusNodeName = FocusNode();
+  final focusNodeRepeatPassword = FocusNode();
+
+  void unfocus(){
+    if(focusNodeEmail.hasFocus) focusNodeEmail.unfocus();
+    if(focusNodePassword.hasFocus) focusNodePassword.unfocus();
+    if(focusNodeName.hasFocus) focusNodeName.unfocus();
+    if(focusNodeRepeatPassword.hasFocus) focusNodeRepeatPassword.unfocus();
+  }
 
   void showSnackBar(BuildContext context, String message){ 
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -72,8 +92,8 @@ class _LoginScreenBodyState extends ConsumerState<_LoginScreenBody> {
           child:  Column(
             mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50),
-            Text('Inicia sesión', style: titleStyle),
+            SizedBox(height: 20),
+            Text('Crear cuenta', style: titleStyle),
             SizedBox(height: 30),
             Image.asset("assets/img/icon.png", width: size.width * 0.8, fit: BoxFit.cover),
             const SizedBox(height: 30),
@@ -90,9 +110,9 @@ class _LoginScreenBodyState extends ConsumerState<_LoginScreenBody> {
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.email_outlined)
                       ),
-                      validator: validarEmail,
+                      validator: _validarEmail,
                       onChanged: (value) {
-                        if(validarEmail(value) == null) {
+                        if(_validarEmail(value) == null) {
                           email = value;
                           return;
                         }
@@ -102,7 +122,24 @@ class _LoginScreenBodyState extends ConsumerState<_LoginScreenBody> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      obscureText: obscureText,
+                      focusNode: focusNodeName,
+                      decoration: const InputDecoration(
+                        label: Text("Nombre completo"),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.person_outline)
+                      ),
+                      validator: _validarNombre,
+                      onChanged: (value) {
+                        if(_validarNombre(value) == null) {
+                          name = value;
+                          return;
+                        }
+                        name = "";
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      obscureText: obscureTextPassword,
                       focusNode: focusNodePassword,
                       decoration: InputDecoration(
                         label: Text("Contraseña"),
@@ -112,46 +149,81 @@ class _LoginScreenBodyState extends ConsumerState<_LoginScreenBody> {
                         ),
                         suffixIcon: GestureDetector(
                           child: Icon(
-                            obscureText ? Icons.visibility_off:  Icons.visibility,
+                            obscureTextPassword ? Icons.visibility_off:  Icons.visibility,
                           ),
                           onTap: () {
                             setState(() {
-                              obscureText = !obscureText;
+                              obscureTextPassword = !obscureTextPassword;
                             });
                           },
                         )
                       ),
                       onChanged: (value) {
-                        if(validarPassword(value) == null) {
+                        if(_validarPassword(value) == null) {
                           password = value;
                           return;
                         }
                         password = "";
                       },
-                      validator: validarPassword,
+                      validator: _validarPassword,
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      obscureText: obscureTextRepeatPassword,
+                      focusNode: focusNodeRepeatPassword,
+                      decoration: InputDecoration(
+                        label: Text("Repita la contraseña"),
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(
+                          Icons.lock_outline,
+                        ),
+                        suffixIcon: GestureDetector(
+                          child: Icon(
+                            obscureTextRepeatPassword ? Icons.visibility_off:  Icons.visibility,
+                          ),
+                          onTap: () {
+                            setState(() {
+                              obscureTextRepeatPassword = !obscureTextRepeatPassword;
+                            });
+                          },
+                        )
+                      ),
+                      onChanged: (value) {
+                        if(_validarPassword(value) == null) {
+                          repeatPassword = value;
+                          return;
+                        }
+                        repeatPassword = "";
+                      },
+                      validator: _validarPassword,
                     ),
                     const SizedBox(height: 30),
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton(
                         onPressed: isLoading? null :() async {
-                          if(focusNodeEmail.hasFocus) focusNodeEmail.unfocus();
-                          if(focusNodePassword.hasFocus) focusNodePassword.unfocus();
+                          unfocus();
+                          if(password != repeatPassword) {
+                            showSnackBar(context, "Las contraseñas no coinciden");
+                            return;
+                          }
                           if(!_formKey.currentState!.validate()) return;
                           setState(() {
                             isLoading = true;
                           });
-                          bool result = await ref.read(authProvider.notifier).loginUser(email, password);
+                          String? result = await ref.read(authProvider.notifier).registerUser(email, password, name);
                           setState(() {
                             isLoading = false;
                           });
-                          if(!result && context.mounted) {
-                            final String errorMessage = ref.read(authProvider).errorMessage;
-                            final String snackBarMessage = errorMessage != "" ? errorMessage: "Error al iniciar sesión";
+                          if(result != null && context.mounted) {
+                            final String errorMessage = result.trim();
+                            final String snackBarMessage = errorMessage != "" ? errorMessage: "Error al crear cuenta";
                             showSnackBar(context, snackBarMessage);
+                            return;
                           }
+                          if(context.mounted) context.go("/successful-register");
                         },
-                        child: Text(isLoading? "Cargando...": "Iniciar sesión"),
+                        child: Text(isLoading? "Cargando...": "Crear cuenta"),
                       ),
                     )
                   ],
@@ -160,14 +232,10 @@ class _LoginScreenBodyState extends ConsumerState<_LoginScreenBody> {
             ),
             SizedBox(height: 30),
             TextButton(
-              onPressed: () => context.go("/forgot-password"),
-              child: Text ("¿Olvidaste tu contraseña?")
+              onPressed: () => context.go("/login"),
+              child: Text ("¿Ya tienes cuenta? Inicia sesión")
             ),
-            TextButton(
-              onPressed: () => context.go("/register"),
-              child: Text ("Crear cuenta")
-            ),
-            SizedBox(height: 50),
+            SizedBox(height: 50)
           ],
           ),
         ),

@@ -13,6 +13,7 @@ List<String> noAuthRequiredPaths = [
   "/login",
   "/register",
   "/forgot-password",
+  "/successful-register"
 ];
 
 bool isNotAuthRequired(String path) {
@@ -57,6 +58,21 @@ final goRouterProvider = Provider((ref) {
       GoRoute(
         path: "/login",
         builder:(context, state) => const LoginScreen(),
+      ),
+
+      GoRoute(
+        path: "/register",
+        builder:(context, state) => const RegisterScreen(),
+      ),
+
+      GoRoute(
+        path: "/successful-register",
+        builder:(context, state) => const SuccessfulRegisterScreen(),
+      ),
+
+      GoRoute(
+        path: "/forgot-password",
+        builder:(context, state) => const ForgotPasswordScreen(),
       ),
 
       GoRoute(

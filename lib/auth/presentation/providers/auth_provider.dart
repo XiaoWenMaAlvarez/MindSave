@@ -52,7 +52,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  void logout([String? errorMessage]) async {
+  Future<void> logout([String? errorMessage]) async {
     await localStorageService.removeKey("token");
 
     state = state.copyWith(
@@ -68,19 +68,29 @@ class AuthNotifier extends StateNotifier<AuthState> {
       _setLoggedUser(user);
       return true;
     } on WrongCredentials {
-      logout("Credenciales incorrectas");
+      await logout("Credenciales incorrectas");
       return false;
     } on ConnectionTimeout {
-      logout("Conexión perdida");
+      await logout("Conexión perdida");
       return false;
-    }catch(e) {
-      logout("Error al iniciar sesión");
+    } on EmailNotVerified {
+      await logout("Cuenta aún no activada, por favor, revise su bandeja de entrada y siga las instrucciones para activarla");
+      return false;
+    } catch(e) {
+      await logout("Error al iniciar sesión");
       return false;
     }
   }
 
-  void registerUser(String email, String password, String name){
-    //TODO IMPLEMENTAR
+  Future<String?> registerUser(String email, String password, String name) async {
+    try {
+      final String? result = await authRepository.register(email, password, name);
+      return result;
+    } on ConnectionTimeout {
+      return "Conexión perdida";
+    }catch(e) {
+      return "Error al crear cuenta";
+    }
   }
 
   void checkAuthStatus() async{

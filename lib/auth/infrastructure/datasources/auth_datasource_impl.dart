@@ -45,6 +45,7 @@ class AuthDatasourceImpl extends AuthDatasource {
       return User.fromObject(response.data);
     } on DioException catch (e) {
       if(e.response?.statusCode == 400) throw WrongCredentials();
+      if(e.response?.statusCode == 401) throw EmailNotVerified();
       if(e.type == DioExceptionType.connectionTimeout) throw ConnectionTimeout();
       throw CustomError("Error de Dio desconocido", 1);
     } catch(e) {
@@ -53,9 +54,22 @@ class AuthDatasourceImpl extends AuthDatasource {
   }
 
   @override
-  Future<User> register(String email, String password, String name) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<String?> register(String email, String password, String name) async {
+    try {
+      final response = await dio.post("/api/auth/register", data: {
+        "email": email,
+        "password": password,
+        "name": name
+      });
+      if(response.statusCode == 201) return null;
+      return "Error al crear usuario";
+    } on DioException catch (e) {
+      if(e.response?.statusCode == 400) return e.response?.data["error"] ?? "Error al crear usuario";
+      if(e.type == DioExceptionType.connectionTimeout) return "Conexión perdida";
+      return "Error al crear usuario";
+    } catch(e) {
+      return "Error al crear usuario";
+    }
   }
 
 }
