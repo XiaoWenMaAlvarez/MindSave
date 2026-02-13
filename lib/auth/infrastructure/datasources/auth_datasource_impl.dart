@@ -55,6 +55,7 @@ class AuthDatasourceImpl extends AuthDatasource {
 
   @override
   Future<String?> register(String email, String password, String name) async {
+    final String defaultErrorMessage = "Error al crear usuario";
     try {
       final response = await dio.post("/api/auth/register", data: {
         "email": email,
@@ -62,13 +63,31 @@ class AuthDatasourceImpl extends AuthDatasource {
         "name": name
       });
       if(response.statusCode == 201) return null;
-      return "Error al crear usuario";
+      return defaultErrorMessage;
     } on DioException catch (e) {
-      if(e.response?.statusCode == 400) return e.response?.data["error"] ?? "Error al crear usuario";
+      if(e.response?.statusCode == 400) return e.response?.data["error"] ?? defaultErrorMessage;
       if(e.type == DioExceptionType.connectionTimeout) return "Conexión perdida";
-      return "Error al crear usuario";
+      return defaultErrorMessage;
     } catch(e) {
-      return "Error al crear usuario";
+      return defaultErrorMessage;
+    }
+  }
+  
+  @override
+  Future<String?> resetPassword(String email) async {
+    final String defaultErrorMessage = "Error al intentar restablecer la contraseña";
+    try {
+      final response = await dio.post("/api/auth/reset-password", data: {
+        "email": email,
+      });
+      if(response.statusCode == 200) return null;
+      return defaultErrorMessage;
+    } on DioException catch (e) {
+      if(e.response?.statusCode == 404) return e.response?.data["error"] ?? defaultErrorMessage;
+      if(e.type == DioExceptionType.connectionTimeout) return "Conexión perdida";
+      return  defaultErrorMessage;
+    } catch(e) {
+      return defaultErrorMessage;
     }
   }
 

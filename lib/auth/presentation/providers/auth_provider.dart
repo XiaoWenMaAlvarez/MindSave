@@ -93,6 +93,17 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
+  Future<String?> resetPassword(String email) async {
+    try {
+      final String? result = await authRepository.resetPassword(email);
+      return result;
+    } on ConnectionTimeout {
+      return "Conexión perdida";
+    }catch(e) {
+      return "Error al restablecer la contraseña";
+    }
+  }
+
   void checkAuthStatus() async{
     final String? token = await localStorageService.getValue<String>("token");
     if(token == null) return logout();
