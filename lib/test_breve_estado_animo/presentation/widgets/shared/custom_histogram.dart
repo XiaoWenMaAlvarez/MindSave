@@ -213,9 +213,11 @@ List<LineChartBarData> getLineChartBarData(List<int?> spots, Color color) {
       }
 
     } else {
-      LineChartBarData newLineChartBarData = createCHartBarData(newSpots, color);
-      newLinesChartBarData.add(newLineChartBarData);
-      newSpots = [];
+      if (newSpots.isNotEmpty) {
+        LineChartBarData newLineChartBarData = createCHartBarData(newSpots, color);
+        newLinesChartBarData.add(newLineChartBarData);
+        newSpots = [];
+      }
     }
   }
 

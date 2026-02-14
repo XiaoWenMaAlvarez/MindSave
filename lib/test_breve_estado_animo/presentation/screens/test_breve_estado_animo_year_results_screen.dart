@@ -6,8 +6,26 @@ import 'package:mindsave/test_breve_estado_animo/presentation/providers/provider
 import 'package:mindsave/test_breve_estado_animo/presentation/widgets/widgets.dart';
 import 'package:mindsave/home/presentation/widgets/widgets.dart';
 
-class FollowUpView extends StatelessWidget {
-  const FollowUpView({super.key});
+
+class TestBreveEstadoAnimoYearResultsScreen extends StatelessWidget {
+
+  const TestBreveEstadoAnimoYearResultsScreen({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+
+    return Scaffold(
+      key: scaffoldKey,
+      body: _FollowUpView(),
+      bottomNavigationBar: CustomBottomNavigation(currentIndex: 2),
+      endDrawer: SideMenu(scaffoldKey: scaffoldKey),
+    );
+  }
+}
+
+class _FollowUpView extends StatelessWidget {
+  const _FollowUpView();
 
   @override
   Widget build(BuildContext context) {

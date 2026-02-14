@@ -9,11 +9,17 @@ import '../mappers/test_breve_estado_de_animo_mapper.dart';
 class TestBreveEstadoDeAnimoAPIDatasource extends TestBreveEstadoDeAnimoDatasource{
 
   late final Dio dio;
+  final String accessToken;
 
-  TestBreveEstadoDeAnimoAPIDatasource(){
+  TestBreveEstadoDeAnimoAPIDatasource({
+    required this.accessToken
+  }){
     dio = Dio(
       BaseOptions(
-        baseUrl: Environment.apiUrlBase
+        baseUrl: Environment.apiUrlBase,
+        headers: {
+          "Authorization": "Bearer $accessToken"
+        }
       )
     );
   }
@@ -30,8 +36,6 @@ class TestBreveEstadoDeAnimoAPIDatasource extends TestBreveEstadoDeAnimoDatasour
     Map<String, dynamic> testBreveResponseJSON = testBreveResponse.toJson();
     return testBreveResponseJSON;
   }
-
-  //TODO Obtener el ID del usuario mediante autenticación
 
   @override
   Future<void> saveTestBreveEstadoDeAnimo(TestBreveEstadoDeAnimo nvoTestBreveEstadoDeAnimo) async {

@@ -4,9 +4,28 @@ import 'package:go_router/go_router.dart';
 import 'package:mindsave/test_breve_estado_animo/domain/entities/entities.dart';
 import 'package:mindsave/test_breve_estado_animo/presentation/providers/providers.dart';
 import 'package:mindsave/home/presentation/widgets/widgets.dart';
+import 'package:mindsave/test_breve_estado_animo/presentation/widgets/widgets.dart';
 
-class DailyResultView extends StatelessWidget {
-  const DailyResultView({super.key});
+
+class TestBreveEstadoAnimoDailyResultsScreen extends StatelessWidget {
+
+  const TestBreveEstadoAnimoDailyResultsScreen({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+
+    return Scaffold(
+      key: scaffoldKey,
+      body: _DailyResultView(),
+      bottomNavigationBar: CustomBottomNavigation(currentIndex: 1),
+      endDrawer: SideMenu(scaffoldKey: scaffoldKey),
+    );
+  }
+}
+
+class _DailyResultView extends StatelessWidget {
+  const _DailyResultView();
 
   @override
   Widget build(BuildContext context) {

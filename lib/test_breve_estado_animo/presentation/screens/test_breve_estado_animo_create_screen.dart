@@ -7,8 +7,25 @@ import 'package:mindsave/test_breve_estado_animo/presentation/widgets/widgets.da
 import 'package:mindsave/home/presentation/widgets/widgets.dart';
 
 
-class CreateView extends StatelessWidget {
-  const CreateView({super.key});
+class TestBreveEstadoAnimoCreateScreen extends StatelessWidget {
+
+  const TestBreveEstadoAnimoCreateScreen({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+
+    return Scaffold(
+      key: scaffoldKey,
+      body: _CreateView(),
+      bottomNavigationBar: CustomBottomNavigation(currentIndex: 0),
+      endDrawer: SideMenu(scaffoldKey: scaffoldKey),
+    );
+  }
+}
+
+class _CreateView extends StatelessWidget {
+  const _CreateView();
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,29 @@ import 'package:go_router/go_router.dart';
 import 'package:mindsave/test_breve_estado_animo/domain/entities/entities.dart';
 import 'package:mindsave/test_breve_estado_animo/presentation/providers/providers.dart';
 import 'package:mindsave/home/presentation/widgets/widgets.dart';
+import 'package:mindsave/test_breve_estado_animo/presentation/widgets/widgets.dart';
 
-class DetailsFollowUpView extends StatelessWidget {
-  const DetailsFollowUpView({super.key});
+
+class TestBreveEstadoAnimoDetailsYearResultsScreen extends StatelessWidget {
+
+  const TestBreveEstadoAnimoDetailsYearResultsScreen({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+
+    return Scaffold(
+      key: scaffoldKey,
+      body: _DetailsFollowUpView(),
+      bottomNavigationBar: CustomBottomNavigation(currentIndex: 2),
+      endDrawer: SideMenu(scaffoldKey: scaffoldKey),
+    );
+  }
+}
+
+
+class _DetailsFollowUpView extends StatelessWidget {
+  const _DetailsFollowUpView();
 
   @override
   Widget build(BuildContext context) {
